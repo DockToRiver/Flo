@@ -1,0 +1,1062 @@
+:root {
+  --bg: #01001d;
+  --text: #ffffffa2;
+  --accent: #90f4ff;
+  --highlight: #ffffff1a;
+  --glow: #00ffff;
+--font-main: 'Source Sans Pro', sans-serif; 
+  --font-accent: 'Futura PT', 'Futura PT';
+    --font-size: 24px;
+
+  scroll-behavior: smooth;
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background: 
+    url('images/Background warpS.jpg') repeat center top ,
+    #000; /* fallback color when image ends */
+  background-size: 100% auto;
+  background-attachment: scroll;
+  color: var(--text);
+  line-height: 1.6;
+  padding-bottom: 100px;
+}
+
+#parallax-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+
+  /* This line applies a transparency fade from top (clear) to bottom (visible) */
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 70%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 70%);
+
+  background-image: url('images/Background warp.jpg');
+  background-repeat: repeat;
+  background-position: center top;
+  background-size: cover;
+
+  z-index: -1;
+  pointer-events: none;
+  will-change: transform;
+}
+
+
+
+
+
+.name-logo {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  animation: shimmerGlow 10s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px var(--glow));
+}
+@keyframes shimmerGlow {
+  0% {
+    filter: drop-shadow(0 0 2px var(--glow));
+  }
+ 
+  50% {
+    filter: drop-shadow(0 0 5px var(--glow));
+  }
+ 
+  100% {
+    filter: drop-shadow(0 0 2px var(--glow));
+  }
+}
+
+header {
+  position: relative; /* make header a positioning context */
+}
+
+
+
+
+header {
+  padding: 20px 0px 60px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 3.5em;
+  font-family: var(--font-accent);
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.25em;
+  color: var(--text);
+  letter-spacing: 1px;
+}
+
+.top-contact {
+  background: rgba(15, 15, 15, 0.8); /* Dark translucent bar */
+  color: var(--text);
+  text-align: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--highlight);
+}
+
+.top-contact a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.top-contact a:hover {
+  color: var(--text);
+}
+
+.top-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: transparent;
+}
+
+.top-nav button {
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.top-nav button:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+
+section {
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: auto;
+  border-bottom: 1px solid var(--highlight);
+}
+
+h2 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  font-family: var(--font-accent);
+  color: var(--accent);
+  filter: drop-shadow(0 0 2px var(--glow));
+}
+
+p, li {
+  font-size: 1.1em;
+  color: var(--text);
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 2px var(--glow));
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul li::before {
+  content: "– ";
+  color: var(--accent);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%; /* Ensure gallery container takes full width */
+  box-sizing: border-box; /* Include padding/border in width calculation */
+  
+}
+
+.gallery img,
+.gallery video {
+  width: 100%;
+  height: auto;
+  border-radius: 0; /* ✅ Flat edges */
+  object-fit: cover;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+
+.gallery img:hover,
+.gallery video:hover {
+  transform: scale(1.03);
+}
+
+.art-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  /* Add these to ensure it fully utilizes its parent's width */
+  width: 100%;
+  box-sizing: border-box; /* Good practice for responsive layout */
+}
+
+/* THIS IS THE CRITICAL CHANGE FOR THE ART GALLERY ITEMS */
+.art-gallery .item {
+  /* Explicitly allow the item to shrink and grow within the grid cell */
+  min-width: 0; /* Allows item to shrink smaller than content if grid demands */
+  width: auto;  /* Ensures no fixed width is inherited/applied */
+  /* If you previously had `overflow: hidden;` here, keep it. */
+  overflow: hidden;
+
+  /* You can optionally use flexbox on the item itself for image centering/sizing within the item */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers image horizontally within its slot */
+  justify-content: center; /* Centers image vertically within its slot */
+}
+
+/* Ensure the image fills its parent item */
+.art-gallery img {
+  width: 100%; /* Image always fills its parent item */
+  height: auto;
+  display: block; /* Ensure image behaves like a block element within its flex parent */
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+
+.art-gallery img:hover {
+  transform: scale(1.03); /* subtle zoom on hover */
+}
+
+
+#art-lightbox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  cursor: zoom-out;
+}
+
+#lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  transition: transform 0.2s ease;
+  cursor: grab;
+  position: relative;
+}
+
+
+
+
+
+
+
+#contact {
+  text-align: center;
+  padding-top: 40px;
+}
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 2.5em;
+  }
+
+  section {
+    padding: 40px 15px;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+}
+#portfolio {
+  padding: 60px 20px;
+  background: linear-gradient(to top, #000000, #00eeff7d);
+}
+
+
+.portfolio-group {
+  margin-bottom: 60px;
+}
+
+.portfolio-group h3 {
+  font-family: var(--font-accent);
+  font-size: 1.75em;
+  margin-bottom: 20px;
+  color: var(--accent);
+  border-left: 4px solid var(--accent);
+  padding-left: 15px;
+}
+
+
+
+/* --- IMAGE/VIDEO STYLES WITHIN ANY GALLERY ITEM --- */
+.gallery img,
+.gallery video {
+  width: 100% !important; /* Image always fills its parent item, HIGH PRIORITY */
+  height: auto;
+  display: block; /* Ensure image/video behaves correctly in flex container */
+  object-fit: cover;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4); /* General shadow */
+  transition: transform 0.3s ease; /* For hover zoom */
+
+}
+.gallery img:hover,
+.gallery video:hover {
+  transform: scale(1.03); /* General hover zoom */
+}
+
+
+.filter-buttons {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.filter-buttons button {
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  padding: 10px 20px;
+  margin: 0 10px 10px 0;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.filter-buttons button:hover,
+.filter-buttons button.active {
+  background: var(--accent);
+  color: #000;
+}
+
+
+/* Lightbox style (optional, if you want to build it next) */
+.lightbox {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  display: none;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 0px;
+  box-shadow: 0 0 40px rgba(255,255,255,0.2);
+}
+/* 🔽 Keyframe: fade in and scale up smoothly */
+@keyframes fadeInGrow {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* 🔽 Animation trigger class */
+.item.animate-in {
+  opacity: 0;
+  animation: fadeInGrow 0.2s ease-out forwards;
+}
+
+
+.project-detail {
+  display: none;
+  background: #00451ea8;
+  padding: 40px 20px;
+  margin: 20px 0;
+  border: 1px solid #333;
+}
+
+.project-detail h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.project-detail video,
+.project-detail img {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.project-stills,
+.project-clips {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  margin-top: 20px;
+}
+
+.close-project {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10001;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 0 10px var(--glow);
+  transition:
+    background 0.3s ease,
+    box-shadow 0.4s ease,
+    transform 0.3s ease;
+}
+
+.close-project:hover {
+  background: var(--accent);
+  box-shadow: 0 0 20px var(--glow), 0 0 40px var(--glow);
+  transform: scale(1.1);
+}
+
+/* Create the X using two rotated lines */
+.close-project::before,
+.close-project::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background-color: var(--accent);
+  transition: background 0.3s ease;
+}
+
+.close-project::before {
+  transform: rotate(45deg);
+}
+
+.close-project::after {
+  transform: rotate(-45deg);
+}
+
+.close-project:hover::before,
+.close-project:hover::after {
+  background-color: var(--bg);
+}
+
+/* --- GALLERY ITEM STYLES (applies to ALL .item divs within any .gallery) --- */
+.gallery .item {
+  /* CRITICAL: Allow grid items to shrink as needed by the grid */
+  min-width: 0 !important; /* Forces it to allow shrinking to 0, HIGH PRIORITY */
+  width: auto !important;  /* Ensures it adapts to the grid, HIGH PRIORITY */
+  max-width: 100% !important; /* Explicitly caps max width, HIGH PRIORITY */
+
+  /* For consistent centering of content within each item's slot */
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* Centers image horizontally */
+  justify-content: center; /* Centers image vertically */
+
+  overflow: hidden; /* Keep this if you want overflow cropped */
+  opacity: 1; /* Default opacity */
+  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* For animate-in and hover */
+  cursor: pointer; /* To indicate clickable items */
+
+}
+
+.gallery .item.animate-in {
+  opacity: 1;
+}
+
+.project-immersive {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.95);
+  overflow-y: auto;
+  padding: 3rem 1.5rem;
+}
+
+.project-content {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #111;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+.close-project {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.project {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.project:hover {
+  transform: scale(1.03);
+}
+
+/* Label that appears over the image on hover */
+.project .click-label {
+  position: absolute;
+  bottom: 0.4rem;
+  right: 0.4rem;
+  background: rgba(144, 244, 255, 0.05); /* soft glow base */
+  color: var(--accent);
+  font-size: 0.65rem;
+  font-family: var(--font-accent);
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 0.3rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+  backdrop-filter: blur(2px);
+  box-shadow: 0 0 4px rgba(144, 244, 255, 0.08);
+}
+
+.project:hover .click-label {
+  opacity: 1;
+}
+
+
+
+/* Lightbox */
+#cinema-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+#cinema-lightbox .lightbox-wrapper {
+  position: relative;
+}
+
+#cinema-lightbox img {
+  max-width: 80vw;
+  max-height: 80vh;
+  border-radius: 8px;
+  display: block;
+}
+
+/* OPEN label on top of the image */
+#cinema-lightbox .open-label {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.25);
+  pointer-events: none;
+}
+/* Subtle hover zoom for photo items */
+.gallery img.photo {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.gallery img.photo:hover {
+  transform: scale(1.2) rotate(0deg);
+  box-shadow: 0 12px 40px rgba(0, 112, 255, 0.8);
+
+}
+
+.logo-banner {
+  overflow: hidden;
+  width: 100%;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.logo-track {
+  display: flex;
+  width: max-content;
+  animation: scrollLogos 30s linear infinite;
+}
+
+.logo-loop {
+  display: flex;
+}
+
+.logo-loop img {
+  height: 30px;
+  margin: 0 8px;
+  display: block;
+  opacity: 0.8;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Animation */
+@keyframes scrollLogos {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.booking-section {
+  padding: 4rem 2rem;
+  background: var(--opacity-bg, rgba(1, 0, 29, 0.5));
+  color: var(--text);
+  text-align: center;
+  max-width: 700px;
+  margin: auto;
+  margin-top: 100px;
+}
+
+.booking-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.booking-section {
+  box-shadow: 0 12px 40px rgba(0, 191, 255, 0.2); /* soft electric blue glow */
+  background-color: rgba(15, 15, 15, 0.7); /* slightly solid background if needed */
+  border-radius: 12px;
+  padding: 40px;
+}
+
+.booking-section input,
+.booking-section textarea {
+  padding: 0.75rem;
+  background: #171e26;
+  border: 1px solid var(--highlight);
+  color: var(--text);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.booking-section button {
+  background: var(--accent);
+  color: var(--bg);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.booking-section button:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+#skuttler {
+  position: absolute;
+  width: 60px;   /* same as peek image width */
+  height: 60px;  /* lock the height */
+  z-index: 9999;
+  cursor: pointer;
+  transition: top 2s, left 2s;
+  pointer-events: auto;
+  overflow: hidden; /* this crops any overflow */
+}
+
+#skuttler img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* or use 'cover' if you want it tighter */
+  pointer-events: none;
+}
+
+#skuttler-score {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #00bfff;
+  font-family: var(--font-accent, sans-serif);
+  font-size: 18px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00bfff66;
+  z-index: 9998; /* Ensure this is present and lower than skuttler's z-index */
+
+  /* --- CONSOLIDATED TRANSITION PROPERTIES --- */
+  transition: top 0.5s ease-out, left 0.5s ease-out, bottom 0.5s ease-out, right 0.5s ease-out, /* For new position */
+              transform 0.4s ease-out, opacity 0.4s ease-out, filter 0.4s ease-out, /* For poof/fade transitions */
+              box-shadow 0.4s ease, /* For pulse/glow */
+              width 0.3s ease, height 0.3s ease; /* Ensure size transitions smoothly too */
+
+  /* --- ESSENTIAL LINES TO FIX SIZE AND CENTERING --- */
+  width: 80px;  /* Explicitly set a fixed width for the bug */
+  height: 38px; /* Explicitly set a fixed height (18px font + 10px top/bottom padding) */
+  display: flex; /* Use flexbox to center content easily */
+  align-items: center; /* Vertically center content */
+  justify-content: center; /* Horizontally center content */
+}
+
+/* --- Keep these animation and utility classes as they are --- */
+#skuttler-score.pulse {
+  animation: pulse-glow 0.6s ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 10px #00bfff66; transform: scale(1); }
+  50% { box-shadow: 0 0 30px #00bfff; transform: scale(1.2); }
+  100% { box-shadow: 0 0 10px #00bfff66; transform: scale(1); }
+}
+
+/* Poof animation for score bug (ONLY ONE COPY OF THIS) */
+@keyframes poof {
+  0% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    filter: blur(0);
+  }
+  50% {
+    transform: scale(1.2) translateY(-20px); /* Grow slightly and move up */
+    opacity: 0.5;
+    filter: blur(5px); /* Add a blur effect */
+  }
+  100% {
+    transform: scale(0.5) translateY(-50px); /* Shrink and move further up */
+    opacity: 0;
+    filter: blur(10px);
+  }
+}
+
+/* Fade-in animation for reappearance (ONLY ONE COPY OF THIS) */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#skuttler-score.poof-away {
+  animation: poof 0.4s ease-out forwards; /* Apply the poof animation */
+  pointer-events: none; /* Disable clicks during animation */
+}
+
+/* Utility class to hide completely without transition */
+#skuttler-score.hidden {
+  display: none;
+  opacity: 0; /* Ensure it's truly invisible */
+  pointer-events: none;
+}
+
+/* Class to apply the fade-in effect */
+#skuttler-score.fading-in {
+  animation: fadeIn 0.8s ease-in forwards; /* Fade in over 0.8s */
+  opacity: 0; /* Start invisible for the fade */
+  pointer-events: auto; /* Re-enable clicks */
+}
+
+/* Remove tucked-away styles if you don't want the auto-tuck anymore */
+/* If you removed tucked-away from script.js, you can remove this block: */
+/*
+#skuttler-score.tucked-away {
+  transform: translateX(calc(100% - 20px));
+  opacity: 0.3;
+  box-shadow: none;
+  pointer-events: none;
+}
+*/
+.youtube-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 ratio */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  background: #000;
+}
+
+.youtube-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.immersive-clips {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  margin-top: 20px;
+}
+
+.immersive-clips video {
+  width: 100%;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  box-shadow: 0 4px 20px rgba(0, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+}
+.top-contact {
+  background: rgba(15, 15, 15, 0.8); /* Dark translucent bar */
+  color: var(--text);
+  text-align: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--highlight);
+
+  box-shadow: 0 4px 15px rgba(0, 255, 255, 0.1); /* ✨ Drop shadow */
+}
+#portfolio {
+  padding: 60px 20px;
+  background: linear-gradient(to top, #000000, #29cdff5d);
+  box-shadow: 0 8px 30px rgba(0, 191, 255, 0.3); /* subtle mysterious blue shadow */
+  border-radius: 10px; /* a little rounding for nicer separation */
+}
+
+.contact-section {
+  padding: 4rem 2rem;
+  background: var(--opacity-bg, rgba(1, 0, 29, 0.5));
+  color: var(--text);
+  text-align: center;
+  max-width: 700px;
+  margin: auto;
+  margin-top: 100px;
+
+  box-shadow: 0 12px 40px rgba(0, 191, 255, 0.2);
+  background-color: rgba(15, 15, 15, 0.7);
+  border-radius: 12px;
+  padding: 40px;
+}
+
+.contact-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.contact-section input,
+.contact-section textarea {
+  padding: 0.75rem;
+  background: #171e26;
+  border: 1px solid var(--highlight);
+  color: var(--text);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.contact-section button {
+  background: var(--accent);
+  color: var(--bg);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.contact-section button:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+
+
+#community-wall {
+  padding: 4rem 2rem;
+  background: var(--opacity-bg, rgba(1, 0, 29, 0.5));
+  color: var(--text);
+  text-align: center;
+  margin: 100px auto;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 191, 255, 0.15);
+  max-width: 1000px;
+}
+
+#community-wall header {
+  background: var(--accent);
+  color: var(--bg);
+  padding: 1rem 1.5rem;
+  font-family: var(--font-accent);
+  font-weight: 600;
+  font-size: 1.5rem;
+  border-radius: 12px 12px 0 0;
+  user-select: none;
+}
+
+#community-wall .canvas-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  max-width: 100%;
+  border: 2px solid var(--highlight);
+  border-top: none;
+  background: #fff; /* keep drawing canvas clean white */
+  overflow: hidden;
+  border-radius: 0 0 12px 12px;
+}
+
+#community-wall canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  cursor: crosshair;
+  z-index: 1;
+}
+
+#community-wall .toolbar {
+  background: var(--bg);
+  border-top: 1px solid var(--highlight);
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 0 0 12px 12px;
+}
+
+#community-wall label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+#community-wall input[type="color"],
+#community-wall input[type="range"] {
+  margin-top: 0.3rem;
+  cursor: pointer;
+}
+
+#community-wall button {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+#community-wall button:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* --- Undo/Redo Button Styling --- */
+#undo-btn svg,
+#redo-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+
+#undo-btn:active,
+#redo-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 0 12px rgba(144, 244, 255, 0.6);
+}
+
+
+#community-wall #fullscreen-btn {
+  margin-left: auto;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+}
+
+@media (max-width: 600px) {
+  #community-wall .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  #community-wall #fullscreen-btn {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+/* FULLSCREEN MODE FOR COMMUNITY WALL */
+#community-wall.fullscreen {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 2rem !important;
+  max-width: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: var(--bg); /* or a solid dark bg you prefer */
+  z-index: 99999 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
