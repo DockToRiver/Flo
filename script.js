@@ -588,12 +588,19 @@ window.addEventListener("DOMContentLoaded", () => {
         offCtx.moveTo(lastX, lastY);
     }
 
+    // MODIFIED draw
     function draw(e) {
         if (!painting) return;
 
         const rect = userCanvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        
+        // Calculate scaling factors for current event
+        const scaleX = userCanvas.width / rect.width;
+        const scaleY = userCanvas.height / rect.height;
+
+        // Apply scaling to get correct canvas coordinates
+        const x = (e.clientX - rect.left) * scaleX;
+        const y = (e.clientY - rect.top) * scaleY;
 
         offCtx.lineTo(x, y);
         offCtx.stroke();
