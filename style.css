@@ -97,6 +97,14 @@ header h1 {
   color: var(--text);
   margin-bottom: 10px;
 }
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.5rem; /* smaller on phones */
+    font-family: var(--font-accent);
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+}
 
 header p {
   font-size: 1.25em;
@@ -145,6 +153,8 @@ header p {
   border-radius: 2rem;
   cursor: pointer;
   transition: all 0.3s;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .top-nav button:hover {
@@ -201,16 +211,6 @@ a:hover {
   width: 100%; /* Ensure gallery container takes full width */
   box-sizing: border-box; /* Include padding/border in width calculation */
   
-}
-
-.gallery img,
-.gallery video {
-  width: 100%;
-  height: auto;
-  border-radius: 0; /* ✅ Flat edges */
-  object-fit: cover;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease;
 }
 
 
@@ -294,9 +294,7 @@ a:hover {
 }
 
 @media (max-width: 600px) {
-  header h1 {
-    font-size: 2.5em;
-  }
+  
 
   section {
     padding: 40px 15px;
@@ -1060,3 +1058,70 @@ a:hover {
   flex-direction: column !important;
   overflow: hidden !important;
 }
+
+#save-btn {
+  background-color: var(--accent);
+  color: var(--bg);
+  border: 2px solid var(--accent);
+  padding: 0.6rem 1.2rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 
+    box-shadow 0.4s ease,
+    transform 0.3s ease,
+    background-color 0.3s ease,
+    color 0.3s ease;
+  position: relative;
+  z-index: 10;
+
+  /* Subtle glowing halo */
+  box-shadow: 0 0 8px 2px rgba(144, 244, 255, 0.4);
+  animation: subtlePulse 4s ease-in-out infinite;
+}
+
+#save-btn:hover {
+  background-color: #7dd9ff; /* lighter accent */
+  color: var(--bg);
+  box-shadow: 0 0 15px 4px rgba(144, 244, 255, 0.7);
+  transform: translateY(-2px);
+  animation: none; /* stop pulse on hover */
+}
+
+@keyframes subtlePulse {
+  0%, 100% {
+    box-shadow: 0 0 8px 2px rgba(144, 244, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 12px 4px rgba(144, 244, 255, 0.7);
+  }
+}
+
+@media (max-width: 600px) {
+  #save-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+  }
+}
+
+.mural-main-container {
+  display: flex;
+  align-items: flex-start; /* aligns instructions top aligned with canvas */
+  gap: 1.5rem;             /* space between instructions and canvas */
+}
+
+#mural-instructions {
+  flex-shrink: 0;          /* prevents shrinking */
+  max-width: 220px;
+  color: var(--text);      /* subtle text color */
+  font-size: 0.9rem;
+  line-height: 1.4;
+  user-select: none;
+  margin-top: 0.3rem;
+}
+
+.canvas-container {
+  flex-grow: 1;            /* canvas expands to fill remaining space */
+  min-width: 0;            /* fix for flexbox overflow */
+}
+
