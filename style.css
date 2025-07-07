@@ -145,6 +145,9 @@ header p {
 }
 
 .top-nav button {
+  display: flex;           /* Make the button a flex container */
+  align-items: center;     /* Vertically center the text */
+  justify-content: center; /* Horizontally center the text */
   background: transparent;
   border: 2px solid var(--accent);
   color: var(--accent);
@@ -156,6 +159,7 @@ header p {
   min-width: 44px;
   min-height: 44px;
 }
+
 
 .top-nav button:hover {
   background: var(--accent);
