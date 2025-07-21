@@ -4,8 +4,8 @@
   --accent: #90f4ff;
   --highlight: #ffffff1a;
   --glow: #00ffff;
---font-main: 'Futura PT', 'sans-serif'; 
-  --font-accent: 'Futura PT', 'Futura PT';
+--font-main: 'Futura PT'; 
+  --font-accent: 'Futura PT';
     --font-size: 24px;
 
   scroll-behavior: smooth;
@@ -177,7 +177,7 @@ section {
 h2 {
   font-size: 3em;
   margin-bottom: 20px;
-  font-family: var(--font-accent);
+  font-family: var(Futura PTt);
   color: var(--accent);
   filter: drop-shadow(0 0 2px var(--glow));
 }
@@ -737,7 +737,7 @@ a:hover {
   right: 20px;
   background: rgba(0, 0, 0, 0.7);
   color: #00bfff;
-  font-family: var(--font-accent, sans-serif);
+  font-family: var(--font-accent, 'Futura PT');
   font-size: 18px;
   padding: 10px 16px;
   border-radius: 10px;
